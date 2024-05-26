@@ -14,7 +14,7 @@
 </head>
 <body> 
         <p>Sempre que você quiser ver um gatinho, clique no botão abaixo!</p>
-        <!-- Botão que chama a função do JavaScript "" quando é clicado-->
+        <!-- Botão que chama a função do JavaScript "buscarGatinho" quando é clicado-->
         <button onclick="buscarGatinho()">Gatinho</button>
 
         <div id="foto-gato"></div>
@@ -23,7 +23,7 @@
 
     <script>
         /*Usamos uma função assíncrona para pegar a foto do gatinho, pois vamos fazer uma requisição http com fetch,
-       e vamos precisar esperar o resultado dessa busca antes de seguir no código. Dessa forma, com na função assícrona podemos
+       e vamos precisar esperar o resultado dessa busca antes de seguir no código. Dessa forma, na função assícrona podemos
        usar o await, que pausa a execução até que seja retornado o resultado da busca*/
         async function buscarGatinho() {
 
@@ -32,12 +32,13 @@
             /*Convertemos a resposta em formato json (formato padronizado de dados para comunicação 
             entre servidor e cliente)*/
             const fotoDados = await resposta.json();
-            /*e acessarmos o link passado no slide, vemos que é passado um vetor unitário que contém um objeto
+            /*Se acessarmos o link passado no slide, vemos que é a reposta é um vetor unitário que contém um objeto
             com alguns recursos (informações) da imagem, como id, url, height, width
             O que vamos precisar de fato para mostrar a imagem é a url, o endereço dela
             Então pegamos o único elemento do vetor ([0]) e então o atributo url do objeto (.url)*/
             const fotoURL = fotoDados[0].url;
 
+            /*Pegamos a div que reservamos para a foto, e inserimos a imagem nela*/
             const fotoContainer = document.getElementById("foto-gato");
             fotoContainer.innerHTML = `
             <img src="${fotoURL}" width="300" height="300" alt="Foto de um gatinho">
